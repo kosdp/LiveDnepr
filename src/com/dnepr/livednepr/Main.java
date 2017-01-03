@@ -14,18 +14,17 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by root on 14.02.2016.
- */
 public class Main extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        //TextView view = new TextView(this);
-        //view.setText("Hello");
-        int[]camsId = {53,54,72,73,74,76,78,79,83,84,87,92,414,418,420,422,423,424,425};
+        int[] camsId = getCams();
+        drawCams(camsId);
+    }
+
+    private void drawCams(int[] camsId) {
         LinearLayout sc = new LinearLayout(this);
         sc.setOrientation(LinearLayout.VERTICAL);
         for (int camId:camsId) {
@@ -42,6 +41,11 @@ public class Main extends Activity {
         ScrollView sv = new ScrollView(this);
         sv.addView(sc);
         setContentView(sv);
+    }
+
+    private int[] getCams() {
+        int[] camsId = {54,72,74,76,92,251,414,418,419,420,422,423,424,425,427,710,711,716,811};
+        return  camsId;
     }
 
 }
