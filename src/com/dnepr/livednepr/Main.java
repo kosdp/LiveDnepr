@@ -1,6 +1,7 @@
 package com.dnepr.livednepr;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -45,6 +46,13 @@ public class Main extends Activity {
 
     private int[] getCams() {
         int[] camsId = {54,72,74,76,92,251,414,418,419,420,422,423,424,425,427,710,711,716,811};
+
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        int storedPreference = preferences.getInt("storedInt", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("storedInt", storedPreference); // value to store
+        editor.commit();
+
         return  camsId;
     }
 
