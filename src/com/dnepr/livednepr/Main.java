@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Display;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -28,6 +30,10 @@ public class Main extends Activity {
     private void drawCams(int[] camsId) {
         LinearLayout sc = new LinearLayout(this);
         sc.setOrientation(LinearLayout.VERTICAL);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        int width = point.x;
         for (int camId:camsId) {
             ImageView iview = new ImageView(this);
             Bitmap bm = null;
@@ -37,7 +43,7 @@ public class Main extends Activity {
                 e.printStackTrace();
             }
             iview.setImageBitmap(bm);
-            sc.addView(iview, 1024,768);
+            sc.addView(iview, width, width*384/512);
         }
         ScrollView sv = new ScrollView(this);
         sv.addView(sc);
