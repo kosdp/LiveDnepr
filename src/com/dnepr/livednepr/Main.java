@@ -51,7 +51,7 @@ public class Main extends Activity {
     }
 
     private int[] getCams() {
-        int[] camsId = {54,72,74,76,92,251,414,418,419,420,422,423,424,425,427,710,711,716,811};
+        int[] camsId = {54,72,74,76,92,251,414,418,419,420,422,424,425,426,427,710,711,716,811};
 
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         int storedPreference = preferences.getInt("storedInt", 0);
