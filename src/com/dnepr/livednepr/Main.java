@@ -14,13 +14,14 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Main extends Activity {
     @Override
@@ -36,7 +37,7 @@ public class Main extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(Menu.NONE,0,1,"Reload").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE,1,0,"Refresh List").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(Menu.NONE,1,0,"Refresh List").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -61,7 +62,7 @@ public class Main extends Activity {
     }
 
     private void refresh() {
-        Set<String> cams = new HashSet<>();
+        Set<String> cams = new TreeSet<>();
         for(int i = 0; i< 1000; i++) {
             try {
                 String cam = "c" + String.valueOf(i);
@@ -97,6 +98,9 @@ public class Main extends Activity {
         display.getSize(point);
         int width = point.x;
         for (String cam:cams) {
+            TextView tw = new TextView(this);
+            tw.setText(cam);
+            sc.addView(tw);
             ImageView iview = new ImageView(this);
             Bitmap bm = null;
             try {
@@ -115,7 +119,7 @@ public class Main extends Activity {
     private Set<String> getCams() {
         String[] camsId = {"c54","c72","c74","c76","c92","c251","c414","c418","c419","c420","c422","c424","c425","c426","c710","c711","c716","c811"};
         //String[] videoCams = {"c54","c72","c710","c711"};
-        Set<String> cams = new HashSet<>(Arrays.asList(camsId));
+        Set<String> cams = new TreeSet<>(Arrays.asList(camsId));
 
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         cams = preferences.getStringSet("cams", cams);
