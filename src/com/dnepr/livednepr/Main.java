@@ -45,23 +45,23 @@ public class Main extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case 0:
-                reload();
+                reloadCams();
                 break;
             case 1:
-                refresh();
-                reload();
+                refreshCams();
+                reloadCams();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void reload() {
+    private void reloadCams() {
         Intent intent = getIntent();
         finish();
         startActivity(intent);
     }
 
-    private void refresh() {
+    private void refreshCams() {
         Set<String> cams = new TreeSet<>();
         for(int i = 0; i< 1000; i++) {
             try {
@@ -123,7 +123,7 @@ public class Main extends Activity {
 
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         cams = preferences.getStringSet("cams", cams);
-
+        cams = new TreeSet<String>(cams);
 
         return cams;
     }
